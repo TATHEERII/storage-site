@@ -46,6 +46,7 @@ export default function FileList({ folderPath, currentFolderId, onNavigateFolder
       a.click();
       document.body.removeChild(a);
     } catch (err) {
+      alert('Download failed: file not found or access denied');
       console.error('Download error:', err);
     }
   };
