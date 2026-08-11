@@ -10,8 +10,6 @@ import sharedRoutes from './routes/shared.js';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3001;
-
 const app = express();
 
 app.use(cors({ origin: process.env.CLIENT_URL || true, credentials: true }));
@@ -28,6 +26,12 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+const PORT = process.env.PORT || 3001;
+
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
