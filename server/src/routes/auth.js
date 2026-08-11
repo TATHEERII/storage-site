@@ -19,7 +19,12 @@ router.post('/login', async (req, res) => {
       .eq('email', email)
       .single();
 
-    if (error || !user) {
+    if (error) {
+      console.error('Login DB error:', error);
+      return res.status(500).json({ error: 'Database error: ' + error.message });
+    }
+
+    if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
@@ -34,6 +39,7 @@ router.post('/login', async (req, res) => {
     const { password_hash, ...safeUser } = user;
     res.json({ user: safeUser });
   } catch (err) {
+    console.error('Login error:', err);
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -57,8 +63,13 @@ router.get('/me', async (req, res) => {
       .eq('id', decoded.userId)
       .single();
 
-    if (error || !user) {
-      return res.status(401).json({ error: 'Invalid token' });
+    if (error) {
+      console.error('Login DB error:', error);
+      return res.status(500).json({ error: 'Database error: ' + error.message });
+    }
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     res.json({ user });

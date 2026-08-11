@@ -1,3 +1,12 @@
+-- Users table for authentication
+CREATE TABLE IF NOT EXISTS users (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  role TEXT NOT NULL DEFAULT 'subuser',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- Folders table for nested folder structure
 CREATE TABLE IF NOT EXISTS folders (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
