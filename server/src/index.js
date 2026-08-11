@@ -8,7 +8,9 @@ import fileRoutes from './routes/files.js';
 import folderRoutes from './routes/folders.js';
 import sharedRoutes from './routes/shared.js';
 
-dotenv.config();
+if (process.env.VERCEL !== '1') {
+  dotenv.config();
+}
 
 const app = express();
 
