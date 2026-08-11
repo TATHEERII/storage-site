@@ -1,6 +1,6 @@
 [
   {
-    "allowedOrigins": ["http://localhost:5173", "http://localhost:5174"],
+    "allowedOrigins": ["http://localhost:5173", "http://localhost:5174", "https://your-app.vercel.app"],
     "allowedOperations": ["s3PutObject", "s3GetObject", "s3DeleteObject", "s3ListBucket"],
     "allowedHeaders": ["*"],
     "exposeHeaders": ["ETag", "Content-Type"],

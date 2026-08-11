@@ -1,12 +1,12 @@
 # WebSale Storage
 
-Drag-and-drop cloud storage with admin/sub-user permissions powered by Backblaze B2 and Supabase.
+Drag-and-drop cloud storage with admin/sub-user permissions powered by Cloudflare R2 and Supabase.
 
 ## Prerequisites
 
 1. **Node.js** 18+
 2. **Supabase** project with PostgreSQL
-3. **Backblaze B2** bucket named `websale`
+3. **Cloudflare R2** bucket named `websale`
 
 ## Setup
 
@@ -14,14 +14,15 @@ Drag-and-drop cloud storage with admin/sub-user permissions powered by Backblaze
 
 1. Create a new Supabase project at https://supabase.com
 2. Go to **SQL Editor** in the Supabase dashboard
-3. Run the SQL from `server/supabase-schema.sql` to create the `users` table
+3. Run the SQL from `server/supabase-schema.sql` to create the `folders` and `shared_files` tables
 4. Get your **Supabase URL** and **Service Role Key** from **Project Settings > API**
 
-### 2. Configure Backblaze B2
+### 2. Configure Cloudflare R2
 
-1. Create a bucket named `websale` in your Backblaze B2 account
-2. Go to **App Keys** and create an Application Key
-3. Copy the **keyID** and **applicationKey**
+1. Create a bucket named `websale` in your Cloudflare R2 account
+2. Go to **R2 > Manage R2 API Tokens** and create an API token with Read/Write permissions
+3. Copy the **Access Key ID** and **Secret Access Key**
+4. Set up CORS for your bucket (allow your Vercel domain and localhost)
 
 ### 3. Configure Server
 
@@ -35,11 +36,12 @@ JWT_SECRET=websale_super_secret_jwt_key_change_me
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
 
-B2_KEY_ID=a2becc3bcbc2
-B2_APPLICATION_KEY=your-b2-application-key
-B2_BUCKET=websale
-B2_REGION=us-west-002
-B2_ENDPOINT=https://s3.us-west-002.backblazeb2.com
+R2_ACCESS_KEY_ID=your-r2-access-key-id
+R2_SECRET_ACCESS_KEY=your-r2-secret-access-key
+R2_BUCKET=websale
+R2_REGION=us-east-1
+R2_ENDPOINT=https://ac6950a1d4069b5c7854d1dfd394121c.r2.cloudflarestorage.com
+CLIENT_URL=https://your-vercel-app.vercel.app
 ```
 
 3. Install and seed admin:
@@ -83,4 +85,4 @@ Open http://localhost:5173
 - **Frontend:** React 19 + Vite 8
 - **Backend:** Node.js + Express
 - **Database:** Supabase (PostgreSQL)
-- **Storage:** Backblaze B2 (S3-compatible)
+- **Storage:** Cloudflare R2 (S3-compatible)

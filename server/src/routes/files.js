@@ -1,6 +1,6 @@
 import express from 'express';
 import { authenticate, requireAdmin } from '../middleware/auth.js';
-import { generateUploadUrl, generateDownloadUrl, listFiles, deleteFile } from '../config/b2.js';
+import { generateUploadUrl, generateDownloadUrl, listFiles, deleteFile } from '../config/r2.js';
 import supabase from '../config/supabase.js';
 
 const router = express.Router();

@@ -2,16 +2,16 @@ import { S3Client, PutObjectCommand, GetObjectCommand, ListObjectsV2Command, Del
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 const s3 = new S3Client({
-  endpoint: process.env.B2_ENDPOINT,
-  region: process.env.B2_REGION,
+  endpoint: process.env.R2_ENDPOINT,
+  region: process.env.R2_REGION,
   forcePathStyle: true,
   credentials: {
-    accessKeyId: process.env.B2_KEY_ID,
-    secretAccessKey: process.env.B2_APPLICATION_KEY,
+    accessKeyId: process.env.R2_ACCESS_KEY_ID,
+    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
   },
 });
 
-const BUCKET = process.env.B2_BUCKET;
+const BUCKET = process.env.R2_BUCKET;
 
 export async function generateUploadUrl(key, contentType) {
   const command = new PutObjectCommand({
